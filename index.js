@@ -9,6 +9,19 @@ app.get('/', (req, res) => {
 });
 
 // const root = { hello: () => 'Hello' };
+
+const friendDataBase = {};
+
+class Friend {
+  constructor(id, { firstName, lastName, gender, email }) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.email = email;
+  }
+}
+
 const root = {
   friend: () => {
     return {
@@ -18,6 +31,12 @@ const root = {
       gender: 'male',
       email: [{ email: 'example@gmail.com' }, { email: 'test@me.com' }],
     };
+  },
+  createFriend: ({ input }) => {
+    let id = require('crypto').randomBytes(10).toString('hex');
+    friendDataBase[id] = input;
+
+    return new Friend(id, input);
   },
 };
 
