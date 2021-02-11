@@ -11,13 +11,15 @@ const schema = buildSchema(`
         id: ID
         firstName: String
         lastName: String
-        gender: String
+        gender: Gender
         age: Int
-        email: [Email]!
+        email: String
     }
 
-    type Email {
-        email: String
+    enum Gender {
+        MALE
+        FEMALE
+        OTHER
     }
 
     type Query {
@@ -28,9 +30,9 @@ const schema = buildSchema(`
         id: ID
         firstName: String
         lastName: String
-        gender: String
+        gender: Gender
         age: Int
-        email: [Email]!
+        email: String
     }
 
     type Mutation {
