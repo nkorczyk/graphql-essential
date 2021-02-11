@@ -21,16 +21,31 @@ class Friend {
 //     };
 //   },
 
-const resolvers = {
-  getFriend: ({ id }) => {
-    return new Friend(id, friendDataBase[id]);
-  },
-  createFriend: ({ input }) => {
-    let id = require('crypto').randomBytes(10).toString('hex');
-    friendDataBase[id] = input;
+// const resolvers = {
+//   getFriend: ({ id }) => {
+//     return new Friend(id, friendDataBase[id]);
+//   },
+//   createFriend: ({ input }) => {
+//     let id = require('crypto').randomBytes(10).toString('hex');
+//     friendDataBase[id] = input;
 
-    return new Friend(id, input);
+//     return new Friend(id, input);
+//   },
+// };
+
+// resolver map
+export const resolvers = {
+  Query: {
+    getFriend: ({ id }) => {
+      return new Friend(id, friendDataBase[id]);
+    },
+  },
+  Mutation: {
+    createFriend: ({ input }) => {
+      let id = require('crypto').randomBytes(10).toString('hex');
+      friendDataBase[id] = input;
+
+      return new Friend(id, input);
+    },
   },
 };
-
-export default resolvers;

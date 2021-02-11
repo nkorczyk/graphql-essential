@@ -1,12 +1,8 @@
-import { buildSchema } from 'graphql';
+// import { buildSchema } from 'graphql';
+import { makeExecutableSchema } from 'graphql-tools';
+import { resolvers } from './resolvers';
 
-// const schema = buildSchema(`
-//     type Query {
-//         hello: String
-//     }
-// `);
-
-const schema = buildSchema(`
+const typeDefs = `
     type Friend {
         id: ID
         firstName: String
@@ -50,6 +46,60 @@ const schema = buildSchema(`
     type Mutation {
         createFriend(input: FriendInput): Friend
     }
-`);
+`;
 
-export default schema;
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+// const schema = buildSchema(`
+//     type Query {
+//         hello: String
+//     }
+// `);
+
+// const schema = buildSchema(`
+//     type Friend {
+//         id: ID
+//         firstName: String
+//         lastName: String
+//         gender: Gender
+//         age: Int
+//         email: String
+//         contacts: [Contact]
+//     }
+
+//     type Contact {
+//         firstName: String
+//         lastName: String
+//     }
+
+//     enum Gender {
+//         MALE
+//         FEMALE
+//         OTHER
+//     }
+
+//     type Query {
+//         getFriend(id: ID):  Friend
+//     }
+
+//     input FriendInput {
+//         id: ID
+//         firstName: String
+//         lastName: String
+//         gender: Gender
+//         age: Int
+//         email: String
+//         contacts: [ContactInput]
+//     }
+
+//     input ContactInput {
+//         firstName: String
+//         lastName: String
+//     }
+
+//     type Mutation {
+//         createFriend(input: FriendInput): Friend
+//     }
+// `);
+
+export { schema };
