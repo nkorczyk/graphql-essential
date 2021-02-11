@@ -1,9 +1,12 @@
 import express from 'express';
-import schema from './schema';
-import { schema } from './schema';
+import { schema } from './data/schema';
 import { graphqlHTTP } from 'express-graphql';
+import cors from 'cors';
 
 const app = express();
+
+// allow cross-origin requests
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('GraphQL');
@@ -12,7 +15,7 @@ app.get('/', (req, res) => {
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema,
+    schema: schema,
     graphiql: true,
   }),
 );
